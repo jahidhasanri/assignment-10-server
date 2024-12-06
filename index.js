@@ -51,10 +51,21 @@ async function run() {
     app.get('/equepment/:id',async(req,res) => {
         const id=req.params.id;
         const query = {_id: new ObjectId(id)}
-        const result = databasecollection.findOne(query)
+        const result =await databasecollection.findOne(query)
         res.send(result)
     })
 
+    app.get('/myequepment', async (req, res) => {
+      const { email } = req.query; 
+          const query = { userEmail: email };
+          const cursor = databasecollection.find(query);  
+          const result = await cursor.toArray();  
+          res.send(result);  
+      
+  });
+  
+  
+  
 
 
     // Connect the client to the server	(optional starting in v4.7)
