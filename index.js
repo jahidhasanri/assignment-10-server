@@ -57,7 +57,8 @@ async function run() {
 
     app.get('/myequepment', async (req, res) => {
       const { email } = req.query; 
-          const query = { userEmail: email };
+      console.log(email);
+          const query = { useremail: email };
           const cursor = databasecollection.find(query);  
           const result = await cursor.toArray();  
           res.send(result);  
