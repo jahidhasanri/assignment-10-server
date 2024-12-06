@@ -57,7 +57,6 @@ async function run() {
 
     app.get('/myequepment', async (req, res) => {
       const { email } = req.query; 
-      console.log(email);
           const query = { useremail: email };
           const cursor = databasecollection.find(query);  
           const result = await cursor.toArray();  
@@ -68,9 +67,18 @@ async function run() {
   app.delete('/equepment/:id',async(req,res)=>{
     const id=req.params.id;
     const query={_id: new ObjectId(id)}
-    const result=databasecollection.deleteOne(query)
-    res.res(result)
+    const result=await databasecollection.deleteOne(query)
+    res.send(result)
   })
+
+
+  app.get('/equepment/:id',async(req,res)=>{
+    const id=req.params.id;
+    const query={_id: new ObjectId(id)}
+    const result=await databasecollection.findOne(query)
+    res.send(result)
+  })
+
   
   
   
