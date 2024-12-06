@@ -79,6 +79,28 @@ async function run() {
     res.send(result)
   })
 
+
+  app.put('/equepment/:id',async(req,res)=>{
+    const id=req.params.id;
+    const user=req.body;
+    const filter={_id: new ObjectId(id)}
+    const options= {upsert: true}
+    const updateuser = {$set: {
+      img:user.img,
+      itemName:user.itemName,
+      categoryName:user.categoryName,
+      description:user.description,
+      price:user.price,
+      rating:user.rating,
+      customization:user.customization,
+      processingTime:user.processingTime,
+      stockStatus:user.stockStatus
+    }}
+    const result=await databasecollection.updateOne(filter,updateuser,options)
+    res.send(result)
+  })
+
+  
   
   
   
